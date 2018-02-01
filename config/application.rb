@@ -12,6 +12,8 @@ module RailsRecipes
     #其实，翻译档档名叫 events.yml、zh-TW.yml、en.yml 什么都无所谓，重要的是 YAML 结构中第一层要对应
     #locale的名称，也就是 zh-CN，Rails 会加载 config/locales 下所有的YAML词汇档案。
     config.i18n.default_locale = "zh-TW"
+    #抓取台北時間
+    config.time_zone = "Taipei"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
