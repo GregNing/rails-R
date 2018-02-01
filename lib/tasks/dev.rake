@@ -21,3 +21,6 @@ namespace :dev do
   end
 
 end
+
+#account admin@example.org
+#pwd 12345678
