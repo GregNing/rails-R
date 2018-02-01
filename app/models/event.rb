@@ -1,6 +1,10 @@
 class Event < ApplicationRecord
     STATUS = ["draft", "public", "private"]
     belongs_to :category, :optional => true
+    #某些版本的Rails 有个accepts_nested_attributes_for 的bug 
+    #让has_many 故障了，需要额外补上inverse_of 参数，不然存储时会找不到tickets
+    has_many :tickets, :dependent => :destroy, :inverse_of  => :event
+    accepts_nested_attributes_for :tickets, :allow_destroy => true, :reject_if => :all_blank
     validates_inclusion_of :status, :in => STATUS
    validates_presence_of :name, :friendly_id
 #这里不但要检查必填，还检查了必须唯一，而且格式只限小写英数字及横线。
