@@ -15,13 +15,13 @@
   <%= f.text_field :name, :class => "form-control" %>  
 </div>
 <div class="form-group">
-  <%= f.label :description %>
-  <%= f.text_area :description, :class => "form-control" %>
-</div>
-<div class="form-group">
   <%= f.label :friendly_id %>
   <%= f.text_field :friendly_id, :required => true, :class => "form-control" %>
   <p class="help-block">限制小寫英文數字及橫線將作為網址所用</p>
+</div>
+<div class="form-group">
+  <%= f.label :description %>
+  <%= f.text_area :description, :class => "form-control" %>
 </div>
    <div class="form-group">
      <%= f.label :status %>
@@ -37,3 +37,11 @@
        <%= f.select :status, Event::STATUS.map{ |s| [t(s, :scope => "event.status"), s] }, {}, :class => "form-control" %>
      <% end %>          
    </div>
+
+    <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, {}, :class => "form-control" %>
+    </div>
+<script>
+  $("#event_category_id").select2( { theme: "bootstrap"} );
+</script>
