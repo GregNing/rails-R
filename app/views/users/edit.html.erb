@@ -2,12 +2,44 @@
 <h2>Edit User</h2>
 
 <%= form_for @user do |f| %>
-
+<!--用这种嵌套(Nested)表单 UI 的话，
+我们不需要编辑 routes.rb 加上 profile 路由，也不需要 profiles_controller
+，因为透过 users_controller 就可以完成了。
+-->
   <div class="form-group">
     <%= f.label :time_zone %>
     <%= f.time_zone_select :time_zone %>
   </div>
-
+    <%= f.fields_for :profile do |ff| %>
+    <div class="form-group">
+      <%= ff.label :legal_name %>
+      <%= ff.text_field :legal_name, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :birthday %>
+      <%= ff.date_field :birthday, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :location %>
+      <%= ff.text_field :location, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :education %>
+      <%= ff.text_field :education, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :occupation %>
+      <%= ff.text_field :occupation, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :bio %>
+      <%= ff.text_area :bio, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= ff.label :specialty %>
+      <%= ff.text_area :specialty, :class => "form-control" %>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.submit "Save", :class => "btn btn-primary" %>
   </div>
