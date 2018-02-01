@@ -23,3 +23,17 @@
   <%= f.text_field :friendly_id, :required => true, :class => "form-control" %>
   <p class="help-block">限制小寫英文數字及橫線將作為網址所用</p>
 </div>
+   <div class="form-group">
+     <%= f.label :status %>
+    <div class="btn-group" data-toggle="buttons">
+    <% Event::STATUS.each do |status| %>
+    <label class="btn btn-default <%= (status == f.object.status)? 'active' : '' %>">
+      <%= f.radio_button :status, status %>
+      <%= t(status, :scope => "event.status") %>
+      </label>
+    <% end %>
+  </div>
+     <% if false %>
+       <%= f.select :status, Event::STATUS.map{ |s| [t(s, :scope => "event.status"), s] }, {}, :class => "form-control" %>
+     <% end %>          
+   </div>

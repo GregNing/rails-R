@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
-
+    STATUS = ["draft", "public", "private"]
+    validates_inclusion_of :status, :in => STATUS
    validates_presence_of :name, :friendly_id
 #这里不但要检查必填，还检查了必须唯一，而且格式只限小写英数字及横线。
   validates_uniqueness_of :friendly_id

@@ -3,3 +3,8 @@
   admin:
   event_list: 活動列表管理
   hello: "敬愛的 %{name} 你好："
+  event:
+   status:
+   draft: 草稿
+   public: 公開
+   private: 私密
