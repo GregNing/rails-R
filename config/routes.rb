@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root "events#index"
     resources :events
-    resources :users
+    resources :users do
+      #注意：这里用单数 resource :profile，
+      #关于单数 resource 的说法请参考 4-2 根据用户配置切换时区 一节。另外，因为默认的 controller 的命名是 profiles，这里我们偏好自定义命名改为 user_prorfiles。
+      resource :profile, :controller => "user_profiles"
+    end
   end
 
   root "events#index"
