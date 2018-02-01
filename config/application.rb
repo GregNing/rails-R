@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module RailsRecipes
   class Application < Rails::Application
+    #配置中文語系
+    config.i18n.default_locale = "zh-TW"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

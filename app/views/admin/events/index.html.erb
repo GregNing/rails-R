@@ -1,4 +1,7 @@
-<h1>Admin Event List</h1>
+<!-- 也可以写成 t("event_list", :scope => "admin") 结果是一样的 
+其中 t 等同于 I18n.t，是个 Helper 方法，会根据语系来做字符串的替换。
+-->
+<h1><%= t("admin.event_list") %></h1>
 
 <p class="text-right">
 <%= link_to "New Event", new_admin_event_path, :class => "btn btn-primary" %>
