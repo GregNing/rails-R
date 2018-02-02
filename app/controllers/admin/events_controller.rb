@@ -46,6 +46,32 @@ class Admin::EventsController < AdminController
 
     redirect_to admin_events_path
   end
+  #Pro Tip 小技巧：关于 Array(params[:ids] 这个用法，
+  #如果是 Array([1,2,3]) 会等同于 [1,2,3] 没变，
+  #但是 Array[nil] 会变成 [] 空数组，这可以让 .each 方法不会因为 nil.each 
+  #而爆错。如果不这样处理，在没有勾选任何活动就送出的情况，
+  #就会爆出 NoMethodError 错误。除非你额外检查 params[:id] 
+  #如果是 nil 就返回，但不如用 Array 来的精巧。
+  def bulk_update
+    total = 0
+    Array(params[:ids]).each do |event_id|
+      event = Event.find(event_id)
+      # event.destroy
+      # total += 1
+      if params[:commit] == I18n.t(:bulk_update)
+        event.status = params[:event_status]
+        if event.save
+          total += 1
+        end        
+      elsif params[:commit] == I18n.t(:bulk_delete)
+        event.destroy
+        total += 1
+      end
+    end
+
+    flash[:alert] = "成功完成 #{total} 筆"
+    redirect_to admin_events_path
+  end
 
   protected
 

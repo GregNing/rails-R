@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     root "events#index"
     resources :events do
       resources :tickets, :controller => "event_tickets"
+    collection do
+      post :bulk_update
+    end  
     end
     resources :users do
       #注意：这里用单数 resource :profile，

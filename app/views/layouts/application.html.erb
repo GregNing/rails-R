@@ -3,13 +3,13 @@
   <head>
     <title>RailsRecipes</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="container">
+    <div class="container" style="padding-top: 60px">
 
 
       <!-- Static navbar -->
@@ -50,11 +50,12 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-
-
+      <% if notice %>
+        <p class="notice alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
       <%= yield %>
     <%= link_to "FAQ", faq_path %>
    <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
