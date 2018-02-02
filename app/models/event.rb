@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   include RankedModel
-  mount_uploader :logo, EventLogoUploader
+  mount_uploader :logo, EventLogoUploader  
+  mount_uploaders :images, EventImageUploader
+  serialize :images, JSON
   ranks :row_order
   STATUS = ["draft", "public", "private"]
     belongs_to :category, :optional => true

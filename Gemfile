@@ -50,7 +50,7 @@ gem 'ranked-model'
 gem 'jquery-ui-rails'
 gem 'kaminari'
 gem 'ransack'
-gem 'carrierwave'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "mini_magick"
 
 group :development, :test do
