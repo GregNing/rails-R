@@ -48,7 +48,7 @@ gem 'simple_form'
 gem 'ckeditor'
 gem 'ranked-model'
 gem 'jquery-ui-rails'
-
+gem 'kaminari'
 group :development, :test do
   gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

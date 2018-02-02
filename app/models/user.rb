@@ -9,6 +9,7 @@ class User < ApplicationRecord
   #也顺便可以更新 Profile 资料。
   accepts_nested_attributes_for :profile
   has_many :groups, :through => :memberships
+  has_many :registrations
   def display_name
     self.email.split("@").first
   end

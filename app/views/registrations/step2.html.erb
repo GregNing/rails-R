@@ -1,0 +1,48 @@
+<h1><%= @event.name %></h1>
+<h2>Step 2</h2>
+
+<% if @registration.errors.any? %>
+  <ul>
+  <% @registration.errors.full_messages.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+<%= form_for @registration, :url => update_step2_event_registration_path(@event, @registration) do |f| %>
+  
+  <div class="form-group">
+    <%= f.label :name, "姓名", :class => "control-label" %>
+    <%= f.text_field :name, :class => "form-control", :required => true, :autofocus => true %>
+    <div class="help-block with-errors"></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "E-mail", :class => "control-label" %>
+    <%= f.email_field :email, :class => "form-control", :required => true %>
+     <div class="help-block with-errors"></div>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :cellphone, "電話", :class => "control-label" %>
+     <%= f.text_field :cellphone, :class => "form-control", :required => true %>
+    <div class="help-block with-errors"></div>
+  </div>
+
+  <div class="form-group">
+         <%= link_to "Previous", step1_event_registration_path(@event, @registration), :class => "btn btn-default" %>
+      <%= f.submit "Save & Next", :class => "btn btn-primary" %>
+  </div>
+
+<% end %>
+
+<script>
+
+$("form").validator();
+</script>
+<!-- 
+f.object 指的是这个 form_for 表单的 model 物件，也就是 @registration
+f.object.errors[字段名称] 是个数组储存了这个字段的错误讯息
+has-error 和 help-block 是 Bootstrap 提供的样式，这里配合使用。
+autofocus => true 可以在进到这一页时，自动将光标锁定在这一个输入框，
+这样用户就可以马上入坑开始填写。一个页面只能有一个输入框用 autofocus
+-->

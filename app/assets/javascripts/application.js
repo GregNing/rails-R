@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require validator.min
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker/core
