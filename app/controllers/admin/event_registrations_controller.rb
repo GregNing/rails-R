@@ -3,14 +3,30 @@
    before_action :find_event
 
    def index     
-     @registrations = @event.registrations.includes(:ticket).order("id DESC").page(params[:page])
-   if params[:status].present? && Registration::STATUS.include?(params[:status])
-     @registrations = @registrations.by_status(params[:status])
-   end
+    @q = @event.registrations.ransack(params[:q])
 
-   if params[:ticket_id].present?
-     @registrations = @registrations.by_ticket(params[:ticket_id])
-   end
+    @registrations = @q.result.includes(:ticket).order("id DESC").page(params[:page]) 
+    #@registrations = @event.registrations.includes(:ticket).order("id DESC").page(params[:page])
+    #输入的是日期，但是数据库中存的是 UTC 时间，因此这里需要调用 beginning_of_day 和 end_of_day 
+    #才会转换成正确的时间。例如北京时区的 2017/4/30 这一天，对数据库中存 UTC 时间的字段来说，
+    #正确的区间是 2017-04-30 16:00:00 UTC 到 2017-05-01 15:59:59 UTC。
+        if params[:registration_id].present?
+            @registrations = @registrations.where( :id => params[:registration_id].split(",") )
+        end   
+    if params[:start_on].present?
+        @registrations = @registrations.where( "created_at >= ?", Date.parse(params[:start_on]).beginning_of_day )
+    end
+        if params[:end_on].present?
+        @registrations = @registrations.where( "created_at <= ?", Date.parse(params[:end_on]).end_of_day )
+        end
+   
+#      if params[:status].present? && Registration::STATUS.include?(params[:status])
+#      @registrations = @registrations.by_status(params[:status])
+#      end
+
+#     if params[:ticket_id].present?
+#      @registrations = @registrations.by_ticket(params[:ticket_id])
+#    end
 
     end
 
