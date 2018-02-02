@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   include RankedModel
+  mount_uploader :logo, EventLogoUploader
   ranks :row_order
   STATUS = ["draft", "public", "private"]
     belongs_to :category, :optional => true
@@ -16,6 +17,8 @@ class Event < ApplicationRecord
 #   def to_param
 #     "#{self.id}-#{self.name}"
 #   end
+    scope :only_public, -> { where( :status => "public" ) }
+    scope :only_available, -> { where( :status => ["public", "private"] ) }
     #亂數 網址
     def to_param
      self.friendly_id

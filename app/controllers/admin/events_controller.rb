@@ -93,7 +93,8 @@ class Admin::EventsController < AdminController
     #这里 @event.tickets.build 两次，等会表单中就有两笔空的 Ticket 可以编辑。
     #Strong Parameters 的部分，新增了 tickets_attributes 数组包含要修改的 
     #ticket 属性，并且额外多了一个 :id 和 :_destroy 是为了配合 accepts_nested_attributes_for 可以编辑和删除。
-    params.require(:event).permit(:name, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
+    #params.require(:event).permit(:name, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
+    params.require(:event).permit(:name, :logo, :remove_logo, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
   end
 
 end
