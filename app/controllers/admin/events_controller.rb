@@ -11,6 +11,7 @@ class Admin::EventsController < AdminController
   def new
     @event = Event.new
     @event.tickets.build
+    @event.attachments.build
     #@event.tickets.build
   end
 
@@ -27,6 +28,7 @@ class Admin::EventsController < AdminController
   def edit
     @event = Event.find_by_friendly_id!(params[:id])
     @event.tickets.build if @event.tickets.empty?
+    @event.attachments.build if @event.attachments.empty?
     #@event.tickets.build
   end
 
@@ -96,7 +98,8 @@ class Admin::EventsController < AdminController
     #params.require(:event).permit(:name, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
     #params.require(:event).permit(:name, :logo, :remove_logo, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
     #小心 :images => [] 要放在最后，因为默认的 Hash 哈希参数都是放在参数最后
-     params.require(:event).permit(:name, :logo, :remove_logo, :remove_images, :description, :friendly_id, :status, :category_id, :images => [], :tickets_attributes => [:id, :name, :description, :price, :_destroy])
+    #  params.require(:event).permit(:name, :logo, :remove_logo, :remove_images, :description, :friendly_id, :status, :category_id, :images => [], :tickets_attributes => [:id, :name, :description, :price, :_destroy])
+     params.require(:event).permit(:name, :logo, :remove_logo, :remove_images, :description, :friendly_id, :status, :category_id, :images => [], :tickets_attributes => [:id, :name, :description, :price, :_destroy], :attachments_attributes => [:id, :attachment, :description, :_destroy])
   end
 
 end
