@@ -62,6 +62,9 @@ class RegistrationsController < ApplicationController
     @registration.current_step = 3
     if @registration.update(registration_params)
       flash[:notice] = "報名成功"
+      NotificationMailer.confirmed_registration(@registration).deliver_later
+      #以下指令可以在 rails c測試接收報名成功信
+      #NotificationMailer.confirmed_registration( Registration.by_status("confirmed").last ).deliver_now
       redirect_to event_registration_path(@event, @registration)
     else
       render "step3"

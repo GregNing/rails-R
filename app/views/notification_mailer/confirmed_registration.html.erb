@@ -1,0 +1,20 @@
+
+
+<p>Hi <%= @registration.name %>,</p>
+<p>您已完成報名 <%= link_to @event.name, event_url(@event) %></p>
+
+<% content_for :action do %>
+<%= link_to "瀏覽報名結果", event_registration_url(@event, @registration), :class => "btn-primary", :itemprop => "url" %>
+<% end %>
+<% if false %>
+Hi <%= @registration.name %>,
+您已完成報名 <%= @event.name %> <%= event_url(@event) %>
+<!--在 E-mail 里面的网址都必须要写绝对网址 xxx_url，而不是相对网址 xxx_path。
+例如 event_url(@event) 会产生 http://localhost:3000/events/fullstack-meetup，
+而 event_path(@event) 会产生 /events/fullstack-meetup，这样在 E-mail 阅读器中点超连结才能顺利让浏览器打开网址。
+那 Rails 要怎么知道网站位置呢? 我们曾在 config/environments/development.rb 
+写过 config.action_mailer.default_url_options = { :host => 'localhost:3000' } 
+这就是 E-mail 中产生 xxx_url 网址时，会用的网站位置。之后上 production 
+你也必须在 config/environments/production.rb 进行设定。
+-->
+<% end %>
