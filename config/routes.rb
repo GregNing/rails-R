@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   devise_for :users
-  resource :user
+  resource :user  
   # 注意，这里的路由设计使用单数 resource
 # :user，跟 resources :users 相比，单数的路由少了 index action，并且网址上不会有 ID，
 # 路由方法也皆为单数不需要参数，例如 user_path、edit_user_path。会这样设计的原因是对前台用户而言，
