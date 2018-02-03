@@ -52,6 +52,7 @@ gem 'kaminari'
 gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "mini_magick"
+gem 'paper_trail'
 
 group :development, :test do
   gem 'rspec-rails'

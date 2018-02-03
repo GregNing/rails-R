@@ -1,5 +1,6 @@
 class Registration < ApplicationRecord
- #这里设计了 status 状态字段，以及在新建的时候乱数产生一个 UUID 来当作网址 ID。
+  has_paper_trail
+  #这里设计了 status 状态字段，以及在新建的时候乱数产生一个 UUID 来当作网址 ID。
   STATUS = ["pending", "confirmed"]
   validates_inclusion_of :status, :in => STATUS
   validates_presence_of :status, :ticket_id
