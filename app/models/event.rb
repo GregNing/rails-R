@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   include RankedModel
   mount_uploader :logo, EventLogoUploader  
   mount_uploaders :images, EventImageUploader
+  has_many :registration_imports, :dependent => :destroy
   serialize :images, JSON
   ranks :row_order
   STATUS = ["draft", "public", "private"]
