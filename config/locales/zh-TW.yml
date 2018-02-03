@@ -14,6 +14,11 @@
    draft: 草稿
    public: 公開
    private: 私密
+  registration:
+   status:
+    pending: 報名尚未成功
+    confirmed: 報名成功
+    cancalled: 報名已取消
   notification:
    subject:
    confirmed_registration: "報名成功: %{name}"

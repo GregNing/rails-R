@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
   before_action :find_event
+  before_action :set_pending_registration, :only => [:step1, :step1_update, :step2, :step2_update, :step3, :step3_update]
 
   def new
   end
@@ -13,6 +14,7 @@ class RegistrationsController < ApplicationController
     @registration.user = current_user
     @registration.current_step = 1
     if @registration.save
+       CheckRegistrationJob.set( wait: 1.minutes ).perform_later(@registration.id)
     #   redirect_to event_registration_path(@event, @registration)
       redirect_to step2_event_registration_path(@event, @registration)
     else
@@ -27,11 +29,11 @@ class RegistrationsController < ApplicationController
     @registration = @event.registrations.find_by_uuid(params[:id])
   end
   def step1
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
   end
 
   def step1_update
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
     @registration.current_step = 1
     if @registration.update(registration_params)
       redirect_to step2_event_registration_path(@event, @registration)
@@ -40,11 +42,11 @@ class RegistrationsController < ApplicationController
     end
   end
   def step2
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
   end
 
   def step2_update
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
     @registration.current_step = 2
     if @registration.update(registration_params)
       redirect_to step3_event_registration_path(@event, @registration)
@@ -53,15 +55,16 @@ class RegistrationsController < ApplicationController
     end
   end
   def step3
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
   end
 
   def step3_update
-    @registration = @event.registrations.find_by_uuid(params[:id])
+    #@registration = @event.registrations.find_by_uuid(params[:id])
     @registration.status = "confirmed"
     @registration.current_step = 3
     if @registration.update(registration_params)
       flash[:notice] = "報名成功"
+      #deliver_later 方法，就会用这一章设定的异步处理机制去寄信。
       NotificationMailer.confirmed_registration(@registration).deliver_later
       #以下指令可以在 rails c測試接收報名成功信
       #NotificationMailer.confirmed_registration( Registration.by_status("confirmed").last ).deliver_now
@@ -71,6 +74,13 @@ class RegistrationsController < ApplicationController
     end
   end
   protected
+  def set_pending_registration
+    @registration = @event.registrations.find_by_uuid(params[:id])
+    if @registration.status == "cancalled"
+      flash[:alert] = "请重新报名"
+      redirect_to event_path(@event)
+    end
+  end
 
   def registration_params
     params.require(:registration).permit(:ticket_id, :name, :email, :cellphone, :website, :bio)
