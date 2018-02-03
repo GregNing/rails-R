@@ -53,6 +53,9 @@ gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "mini_magick"
 gem 'paper_trail'
+gem 'rubyzip'
+gem 'axlsx'
+gem 'axlsx_rails'
 
 group :development, :test do
   gem 'rspec-rails'
