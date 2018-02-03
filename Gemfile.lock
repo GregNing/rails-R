@@ -321,7 +321,7 @@ DEPENDENCIES
   ranked-model
   ransack
   rspec-rails
-  rubyzip
+  rubyzip (<= 2.0.0)
   sass-rails (~> 5.0)
   select2-rails
   sidekiq

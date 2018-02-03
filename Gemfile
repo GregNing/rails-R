@@ -53,7 +53,7 @@ gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "mini_magick"
 gem 'paper_trail'
-gem 'rubyzip'
+gem 'rubyzip', '<= 2.0.0'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'letter_opener'
