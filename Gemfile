@@ -53,8 +53,7 @@ gem 'ransack'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem "mini_magick"
 gem 'paper_trail'
-#gem 'rubyzip'
-#gem 'zip-zip'
+gem 'rubyzip'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'letter_opener'
@@ -67,10 +66,10 @@ group :development, :test do
   gem 'sqlite3'
 end
 
-gem 'pg','~> 0.18'
+gem 'pg', '~> 0.18'
 
-group :production do
-gem 'rails_12factor'
+group :production do   
+  gem 'rails_12factor'
 end
 
 group :development do
