@@ -52,6 +52,13 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (7.2.5)
       execjs
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    axlsx_rails (0.5.1)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     bcrypt (3.1.11)
     bindex (0.5.0)
     bootstrap-datepicker-rails (1.7.1.1)
@@ -296,6 +303,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  axlsx
+  axlsx_rails
   bootstrap-datepicker-rails
   bootstrap-sass
   byebug
